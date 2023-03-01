@@ -11,21 +11,32 @@ class ControllerLottoWeb {
   }
 
   initializeButtonEvents() {
-    document.getElementById('buy').addEventListener('click', this.handlePurchaseButtonClick);
+    document.querySelector('.inputLabel').addEventListener('submit', this.handlePurchaseButtonClick);
 
-    document.getElementById('result_button').addEventListener('click', this.handleResultButtonClick);
+    document.querySelector('.winningLotto').addEventListener('submit', this.handleResultButtonClick);
 
     document.querySelector('.close').addEventListener('click', this.handleCloseModalButtonClick);
 
     document.querySelector('.restart').addEventListener('click', this.handleRestartButtonClick);
+
+    document.querySelector('.modal').addEventListener('click', e => {
+      this.handleCloseModalOutside(e)
+    })
+
+    window.addEventListener('keydown', e => {
+      this.handleCloseModalEsc(e)
+    });
   }
 
   handlePurchaseButtonClick = () => {
     try {
+      event.preventDefault();
       this.money = view.readMoney();
-      
+
       moneyValidate(this.money);
       this.buyLottos(this.money);
+      this.disablePuchaseButton();
+      this.focusWinningNumber();
     } catch (error) {
       alert(error.message);
     }
@@ -39,6 +50,16 @@ class ControllerLottoWeb {
     view.printAllLotto();
   }
 
+  disablePuchaseButton() {
+    const button = document.querySelector('.buy');
+    button.disabled = true;
+    button.style.background = 'gray';
+  }
+
+  focusWinningNumber() {
+    document.querySelector('.winning').focus();
+  }
+
   printPurchasedLottoNumberToView = () => {
     const lottoNumber = this.lottoMachine.countLotto(this.money);
     view.printPurchasedLottoNumber(lottoNumber);
@@ -46,10 +67,11 @@ class ControllerLottoWeb {
 
   handleResultButtonClick = () => {
     try {
+      event.preventDefault();
       const winningNumber = view.readWinningNumber();
       const bonusNumber = view.readBonusNumber();
 
-      winningAndBonusNumberValidate(winningNumber, bonusNumber)
+      winningAndBonusNumberValidate(winningNumber, bonusNumber);
       this.displayResult(winningNumber, bonusNumber);
     } catch (error) {
       alert(error.message);
@@ -76,6 +98,14 @@ class ControllerLottoWeb {
   handleCloseModalButtonClick = () => {
     view.closeModal();
   };
+
+  handleCloseModalEsc(e){
+    if (e.keyCode == 27) view.closeModal();
+  }
+  
+  handleCloseModalOutside(e){
+    if(e.target === e.currentTarget) view.closeModal()
+  }
 }
 
 module.exports = ControllerLottoWeb;

@@ -131,7 +131,7 @@ label {
   flex-grow: 0;
 }
 
-#buy {
+.buy {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -140,8 +140,8 @@ label {
   position: absolute;
   width: 56px;
   height: 36px;
-  left: 342px;
-  top: 132px;
+  left: 323px;
+  top: 28px;
 
   background: #4e5ba6;
   border-radius: 4px;

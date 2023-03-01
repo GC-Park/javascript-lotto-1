@@ -9,7 +9,6 @@
 
   <body>
     <div id="app">
-
       <!-- header -->
       <header>
         <h1>🎱 행운의 로또</h1>
@@ -20,38 +19,49 @@
         <div class="content">
           <h2>🎱 내 번호 당첨 확인 🎱</h2>
           <div class="inputMoney">
-            <div class="inputLabel">
-              <label>
+            <form class="inputLabel">
+              <label for="money">
                 <p class="readMoney">구입할 금액을 입력해주세요.</p>
               </label>
-              <input id="money" type="number" name="money" placeholder="금액" />
-            </div>
-            <button id="buy">구입</button>
+              <input
+                id="money"
+                type="number"
+                name="money"
+                placeholder="금액"
+                autofocus
+                min="1000"
+                max="100000"
+                step="1000"
+                tabindex="0"
+                required
+              />
+              <input type="submit" class="buy" value="구입">
+            </form>
           </div>
           <p class="buyText"></p>
           <div class="purchase">
             <div class="lottos">
               <ul class="lottoList"></ul>
             </div>
-            <div class="winningLotto">
+            <form class="winningLotto">
               <p>지난 주 당첨번호 6개와 보너스 번호 1개를 입력해주세요.</p>
               <div class="winningNumber">
                 <p>당첨 번호</p>
                 <div class="inputNumber">
-                  <input type="number" name="win" class="winning" />
-                  <input type="number" name="win" class="winning" />
-                  <input type="number" name="win" class="winning" />
-                  <input type="number" name="win" class="winning" />
-                  <input type="number" name="win" class="winning" />
-                  <input type="number" name="win" class="winning" />
+                  <input type="number" name="win" class="winning" max="45" required tabindex="1"/>
+                  <input type="number" name="win" class="winning" max="45" required tabindex="2"/>
+                  <input type="number" name="win" class="winning" max="45" required tabindex="3"/>
+                  <input type="number" name="win" class="winning" max="45" required tabindex="4"/>
+                  <input type="number" name="win" class="winning" max="45" required tabindex="5"/>
+                  <input type="number" name="win" class="winning" max="45" required tabindex="6"/>
                 </div>
               </div>
               <div class="bonusNumber">
                 <p>보너스 번호</p>
-                <input type="number" id="bonus" />
+                <input type="number" id="bonus" max="45" required tabindex="7"/>
               </div>
               <button id="result_button">결과 확인하기</button>
-            </div>
+            </form>
           </div>
         </div>
       </section>
